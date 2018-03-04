@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>A Basic Alarm</title>
+
+		<style>
+			h1 {
+    		color: red;
+    		text-align: center;
+				}
+
+		button{
+		background-color: #555555;
+		padding: 15px 32px
+ 		font-size: 24px;
+ 		display: inline-block;
+ 		text-align: center;
+ 		cursor: pointer;
+ 		color: white;
+			}
+
+			input[type=time]{
+				font-size: 20px;
+				text-align: center;
+			}
+
+		</style>
+	
+	</head>
+	<body>
+
+		<h1>An Alarm</h1>
+
+		<div style="text-align: center;">
+		
+		<input id="time" type="time">
+
+		</div>
+
+		<script>
+		//Trying to create an alarm
+
+		//Audio File
+		var audio = new Audio('http://www.tooby.demon.co.uk/FS2002/INNERMK.WAV');
+		
+
+		//Function Checks if the the current time is the same as the input, if true alarm plays
+		//Function repeats every 1.5 secs.
+		function alarm() {
+		setInterval (function (){	
+		var timeinput = document.getElementById('time').value;
+		var t = new Date();
+		var currenthour = (t.getHours()<10?'0':'') + t.getHours()
+		var currentminute = (t.getMinutes()<10?'0':'') + t.getMinutes()
+		var currenttime = currenthour + ':' + currentminute
+
+			if (currenttime == timeinput){
+				audio.play()
+			}
+			},1500)
+			}		
+
+		//Function displays the time alarm was set
+		function message() {
+		
+		var timeinput = document.getElementById('time').value;
+		var result = document.getElementById('result');
+		
+		if (timeinput.length > 1) {
+		result.textContent = 'Your Alarm is set for: ' + timeinput;
+		
+				} 
+		else {
+			result.textContent = 'Choose a time mate';
+    
+			}
+				
+			}
+
+		</script>
+		
+	<!-- This is an Onclick event, calls the two functions above -->	
+	<div style="text-align: center;">
+
+	<p><button onclick="message(); alarm();">Set Alarm</button></p>
+
+	
+	</div>
+
+	<div style="font-size:18px; text-align: center;">
+
+	<p id="result"></p>
+
+	</div>
+
+	</body>
+
+</html>
